@@ -88,16 +88,16 @@ else:                               ".so"
 
 {.pragma: RLAPI, cdecl, discardable, dynlib: "libraylib" & LEXT.}
 
-type rAudioBuffer* = object
+type rAudioBuffer* {.bycopy.} = object
 # Audio stream type
 # NOTE: Useful to create custom audio streams not bound to a specific file
-type AudioStream* = object
+type AudioStream* {.bycopy.} = object
     buffer*: ptr rAudioBuffer # Pointer to internal data used by the audio system
     sampleRate*: uint32 # Frequency (samples per second)
     sampleSize*: uint32 # Bit depth (bits per sample): 8, 16, 32 (24 not supported)
     channels*: uint32 # Number of channels (1-mono, 2-stereo)
 # Sound source type
-type Sound* = object
+type Sound* {.bycopy.} = object
     stream*: AudioStream # Audio stream
     sampleCount*: uint32 # Total number of samples
 
